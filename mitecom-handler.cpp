@@ -29,19 +29,19 @@ MixedTeamMate MixedTeamParser::parseIncoming(const void* messageData, uint32_t m
 
 	// check magic bytes in header
 	if ('MXTC' != message->messageMagic) {
-		fprintf(stderr, "Magic value mismatch in received message.");
+		fprintf(stderr, "Magic value mismatch in received message.\n");
 		return mate;
 	}
 
 	// we currently support version 1 only
 	if (1 != message->messageVersion) {
-		fprintf(stderr, "Unsupported protocol received.");
+		fprintf(stderr, "Unsupported protocol received.\n");
 		return mate;
 	}
 
 	// check that we got the full message
 	if (messageLength != sizeof(MixedTeamCommMessage) + sizeof(MixedTeamCommValueStruct) * message->messageLength) {
-		fprintf(stderr, "Mismatched message length.");
+		fprintf(stderr, "Mismatched message length.\n");
 		return mate;
 	}
 
