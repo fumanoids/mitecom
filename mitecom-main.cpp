@@ -121,7 +121,7 @@ int main(int argc, char* argv[]) {
 			myInformation.data[ROBOT_ABSOLUTE_X]           =  mrand48() % SHRT_MAX; // millimeters
 			myInformation.data[ROBOT_ABSOLUTE_Y]           =  mrand48() % SHRT_MAX; // millimeters
 			myInformation.data[ROBOT_ABSOLUTE_ORIENTATION] =  mrand48() % 360;      // degree
-			myInformation.data[ROBOT_ABSOLUTE_BELIEF]      = 0.00001;
+			myInformation.data[ROBOT_ABSOLUTE_BELIEF]      = 0; 			// 0 to 255; 0 = no confidence
 
 			MixedTeamCommMessage *messageDataPtr = NULL;
 			uint32_t messageDataLength = 0;
