@@ -105,7 +105,7 @@ int main(int argc, char* argv[]) {
 		if (messageLength > 0) {
 			// message received, process it
 			MixedTeamMate teamMate = MixedTeamParser::parseIncoming(buffer, messageLength, teamID);
-			if (teamMate.robotID != robotID) {
+			if (teamMate.robotID && teamMate.robotID != robotID) {
 				process(teamMate);
 			}
 		} else {

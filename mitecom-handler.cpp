@@ -23,7 +23,7 @@ MixedTeamMate MixedTeamParser::parseIncoming(const void* messageData, uint32_t m
 	assert(htonl(0x12345678) != 0x12345678);
 
 	MixedTeamMate mate;
-	mate.robotID = -1; // mark as invalid
+	mate.robotID = 0; // mark as invalid
 
 	const MixedTeamCommMessage *message = (const MixedTeamCommMessage*)messageData;
 
