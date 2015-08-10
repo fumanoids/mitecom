@@ -139,6 +139,12 @@ enum MixedTeamKeyEnum {
 	/// relative position of ball to robot, y-coordinate (in mm)
 	BALL_RELATIVE_Y                              =   MITECOM_RANGE_COGNITION + 5,
 
+	/// relative position of opposing goal to robot, x-coordinate (in mm)
+	OPPGOAL_RELATIVE_X                           =   MITECOM_RANGE_COGNITION + 6,
+
+	/// relative position of opposing goal to robot, y-coordinate (in mm)
+	OPPGOAL_RELATIVE_Y                           =   MITECOM_RANGE_COGNITION + 7,
+
 
 	/* ******************************************************************
 	** ROBOT CAPABILITIES
