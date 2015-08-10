@@ -4,7 +4,7 @@ CC           := g++
 CPPFLAGS     := -DMITECOM_EXAMPLE \
                 -Wno-multichar \
                 -ggdb3 \
-                -Wfatal-errors -Wpointer-arith -Wcast-qual -Wwrite-strings -Wno-long-long -Wno-variadic-macros -Woverloaded-virtual -Wctor-dtor-privacy -Wstrict-null-sentinel -Wsign-promo
+                -Werror -Wfatal-errors -Wpointer-arith -Wcast-qual -Wwrite-strings -Wno-long-long -Wno-variadic-macros -Woverloaded-virtual -Wctor-dtor-privacy -Wstrict-null-sentinel -Wsign-promo -Wsign-conversion
 
 TARGET       := mitecom
 

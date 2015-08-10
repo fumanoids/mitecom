@@ -60,7 +60,7 @@ int mitecom_open(int port) {
  **
  */
 
-ssize_t mitecom_receive(int sock, void* buffer, int bufferSize) {
+ssize_t mitecom_receive(int sock, void* buffer, unsigned int bufferSize) {
 	struct sockaddr_in remoteAddress;
 	socklen_t addressLen = sizeof(remoteAddress);
 	return recvfrom(sock, buffer, bufferSize, 0, (struct sockaddr *)&remoteAddress, &addressLen);

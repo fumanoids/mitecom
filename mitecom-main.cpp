@@ -26,7 +26,7 @@ MixedTeamMates teamMates;
 uint64_t getCurrentTime () {
 	struct timeval tv;
 	gettimeofday(&tv, 0);
-	return static_cast<uint64_t>( static_cast<uint64_t>(tv.tv_sec) * 1000 + tv.tv_usec / 1000 );
+	return static_cast<uint64_t>( static_cast<uint64_t>(tv.tv_sec) * 1000 + static_cast<uint64_t>(tv.tv_usec) / 1000 );
 }
 
 
