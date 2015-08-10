@@ -6,7 +6,10 @@
 #include <stdlib.h>
 #include <unistd.h>
 #include <limits.h>
+#include <math.h>
 #include <sys/time.h>
+
+#include <string>
 
 
 /*------------------------------------------------------------------------------------------------*/
@@ -145,14 +148,49 @@ int main(int argc, char* argv[]) {
 		if (lastReport + 2000 < getCurrentTime() && teamMates.size() > 0) {
 			printf("=== REPORT ============================================\n");
 			for (MixedTeamMates::iterator it = teamMates.begin(); it != teamMates.end(); it++) {
-				printf("Team mate %d\n", it->first);
-				printf("         Position on field: (%d, %d) at %d degree\n",
-						(it->second).data[ROBOT_ABSOLUTE_X],
-						(it->second).data[ROBOT_ABSOLUTE_Y],
-						(it->second).data[ROBOT_ABSOLUTE_ORIENTATION]);
-				printf("   Belief in this position: %.3f\n",
-						(it->second).data[ROBOT_ABSOLUTE_BELIEF]/255.);
+				MixedTeamMate &mate = it->second;
+				MixedTeamMateData &data = mate.data;
+
+				// extract role
+				std::string currentRoleName;
+				if (data.find(ROBOT_CURRENT_ROLE) != data.end()) {
+					MixedTeamRoleEnum currentRole = (MixedTeamRoleEnum)( data[ROBOT_CURRENT_ROLE] );
+					switch (currentRole) {
+					case ROLE_IDLING:       currentRoleName = "Idling";    break;
+					case ROLE_OTHER:        currentRoleName = "Other";     break;
+					case ROLE_STRIKER:      currentRoleName = "Striker";   break;
+					case ROLE_SUPPORTER:    currentRoleName = "Supporter"; break;
+					case ROLE_DEFENDER:     currentRoleName = "Defender";  break;
+					case ROLE_GOALIE:       currentRoleName = "Goalie";    break;
+					default:                currentRoleName = "Unknown";   break;
+					}
+				} else {
+					currentRoleName = "Not transmitted";
+				}
+
+				// extract ball distance
+				int ballDistance = -1;
+				if (data.find(BALL_RELATIVE_X) != data.end() && data.find(BALL_RELATIVE_Y) != data.end()) {
+					int ballRelX = data[BALL_RELATIVE_X];
+					int ballRelY = data[BALL_RELATIVE_Y];
+					ballDistance = sqrt(ballRelX*ballRelX + ballRelY*ballRelY);
+				}
+
+				printf("Team mate %d (team %d)\n", it->first, teamID);
+				printf("                      Role: %s\n", currentRoleName.c_str());
+				printf("             Ball distance: %d mm\n", ballDistance);
+
+				if (data.find(ROBOT_ABSOLUTE_X) != data.end()) {
+					printf("         Position on field: (%d, %d) at %d degree\n",
+							data[ROBOT_ABSOLUTE_X],
+							data[ROBOT_ABSOLUTE_Y],
+							data[ROBOT_ABSOLUTE_ORIENTATION]);
+					printf("   Belief in this position: %.3f\n", data[ROBOT_ABSOLUTE_BELIEF]/255.);
+				}
+
+				printf("\n");
 			}
+
 			lastReport = getCurrentTime();
 			printf("\n");
 		}
