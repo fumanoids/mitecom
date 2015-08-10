@@ -14,6 +14,8 @@
 /**
  ** Open a listening UDP socket on the given port.
  **
+ ** @param port The UDP port to listen on
+ **
  ** @return -1 on error, otherwise the socket descriptor
  */
 
@@ -57,7 +59,11 @@ int mitecom_open(int port) {
 
 /** Receive a UDP  package.
  **
+ ** @param[in]  sock           The socket to receive the package from
+ ** @param[out] buffer         Buffer to fill with the received UDP package
+ ** @param[in]  bufferSize     Size of buffer
  **
+ ** @return the number of bytes received, or -1 on error
  */
 
 ssize_t mitecom_receive(int sock, void* buffer, unsigned int bufferSize) {
@@ -71,8 +77,10 @@ ssize_t mitecom_receive(int sock, void* buffer, unsigned int bufferSize) {
 
 /** Send a broadcast message from the given socket to a port.
  **
- ** @param socket   The outgoing (local) socket
- ** @param port     The port to broadcast to
+ ** @param sock       The outgoing (local) socket
+ ** @param port       The port to broadcast to
+ ** @param data       The data to send
+ ** @param dataLength The length (in bytes) of the data to send
  */
 
 void mitecom_broadcast(int sock, int port, const void* data, uint32_t dataLength) {
