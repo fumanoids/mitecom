@@ -9,7 +9,11 @@ Relative Coordinate System
 
 The relative coordinate system is for local measurements of the robots. The
 coordinate center is the robot, with the x axis facing forward (based on the
-torso) and the y axis facing left. 
+torso) and the y axis facing left.
+The 0 value of the orientation is pointing to the opponent end of the field
+(right side in the image).
+The value increases counter clockwise.
+
 
 Examples (unit = mm):
 
@@ -28,14 +32,13 @@ y axis to the left.
 
       y
       ^       ______________________
-      |    M  |          |          |  O
-      |    Y  |_ -x, y   |   x, y  _|  P
-      |    G  | |        |        | |  P
- 0    +    O  | |       ( )       | |  G
-      |    A  |_|        |        |_|  O
-      |    L  |  -x,-y   |   x,-y   |  A
-      |       |__________|__________|  L
+      |    M  |          |          |  O             90°
+      |    Y  |_ -x, y   |   x, y  _|  P              ^
+      |    G  | |        |        | |  P              |
+ 0    +    O  | |       ( )       | |  G       180° <- -> 0°
+      |    A  |_|        |        |_|  O              |
+      |    L  |  -x,-y   |   x,-y   |  A              v
+      |       |__________|__________|  L             270°
       |
       +------------------+--------------> x
                          0
-
